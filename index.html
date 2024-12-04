@@ -257,16 +257,29 @@
                 console.log("Response data parsed:", result);
     
                 // Update UI based on response
-                const body = document.body;
-                if ( result.Prediction_Random_Forest === 1) {
-                    body.style.backgroundColor = '#ff6b6b'; // Red for churn
-                    console.log("Prediction indicates churn.");
-                } else {
-                    body.style.backgroundColor = '#51cf66'; // Green for no churn
-                    console.log("Prediction indicates no churn.");
-                }
-                document.getElementById('result').textContent = 
-                result.Prediction_Random_Forest === 1 ? 'churn' : 'Non churn';
+               // Update UI based on response
+const body = document.body;
+
+// Met à jour le style et le texte en fonction de la prédiction
+if (result.Prediction_Random_Forest === 1) {
+    body.style.backgroundColor = '#ff6b6b'; // Rouge pour churn
+    console.log("Prediction indicates churn.");
+} else {
+    body.style.backgroundColor = '#51cf66'; // Vert pour no churn
+    console.log("Prediction indicates no churn.");
+}
+
+// Affiche le texte correspondant
+const resultElement = document.getElementById('result');
+resultElement.textContent = result.Prediction_Random_Forest === 1 ? 'Churn' : 'Non churn';
+
+// Réinitialise l'affichage après 5 secondes
+setTimeout(() => {
+    body.style.backgroundColor = ''; // Réinitialise la couleur de fond
+    resultElement.textContent = ''; // Réinitialise le texte
+    console.log("UI reset after 5 seconds.");
+}, 5000);
+
 
     
                 // Reset background color after delay
